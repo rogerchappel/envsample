@@ -4,4 +4,6 @@ coverage/
 .env
 .env.*
 !.env.example
+!fixtures/**/.env
+!fixtures/**/.env.*
 *.log
