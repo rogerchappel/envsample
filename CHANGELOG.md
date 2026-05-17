@@ -9,7 +9,12 @@ format and uses semantic versioning when versioned releases are published.
 
 ### Added
 
-- Initial project setup.
+- TypeScript CLI with scan, generate, and validate commands.
+- Source scanning for JavaScript, TypeScript, Python, shell, Docker Compose, and common config files.
+- Blank .env.example rendering grouped by source file.
+- Validation for missing keys, stale keys, and suspicious secret-looking sample values.
+- .envsampleignore support and documented allow comments.
+- Fixtures, unit tests, and real CLI smoke coverage.
 
 ## Release Links
 
