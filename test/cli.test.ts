@@ -12,3 +12,23 @@ test("CLI smoke scans fixtures as JSON", () => {
   assert.ok(payload.references.some((reference: { name: string }) => reference.name === "DATABASE_URL"));
   assert.ok(!result.stdout.includes("real-password"));
 });
+
+test("CLI can fail on stale example keys", () => {
+  const result = spawnSync(
+    process.execPath,
+    [
+      "--import",
+      "tsx",
+      "src/bin.ts",
+      "validate",
+      "fixtures/unsafe",
+      "--example",
+      ".env.example",
+      "--fail-on-stale"
+    ],
+    { encoding: "utf8" }
+  );
+
+  assert.equal(result.status, 1);
+  assert.match(result.stdout, /OLD_UNUSED/);
+});
