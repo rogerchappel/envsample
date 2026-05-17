@@ -1,6 +1,6 @@
 # EnvSample PRD
 
-Status: in-progress
+Status: MVP implemented
 
 ## Summary
 
@@ -23,6 +23,12 @@ Repos often reference process.env keys, shell variables, or config placeholders 
 - Validate existing .env.example for missing, stale, or suspicious secret-looking values.
 - Output text and JSON reports.
 - Include ignore patterns, allowlist comments, fixtures, tests, and CLI smoke.
+
+## MVP Commands
+
+- scan: discover env names and source locations.
+- generate: print or write a blank .env.example.
+- validate: compare source references against .env.example and flag unsafe sample values.
 
 ## Non-goals
 
