@@ -1,13 +1,7 @@
-# envsample Documentation
+# EnvSample Docs
 
-This directory holds project documentation.
-
-## Contents
-
-- [Contributing guide](../CONTRIBUTING.md)
-- [Security policy](../SECURITY.md)
-- [Agent instructions](../AGENTS.md)
-
-## Additional docs
-
-For a hosted documentation site, see the `docs-site/` directory if present.
+- PRD.md: product scope and non-goals.
+- TASKS.md: MVP completion state and next tasks.
+- ORCHESTRATION.md: guidance for agents and automated workflows.
+- orchestration.json: machine-readable workflow contract.
+- SAFETY.md: practical rules for avoiding secret exposure.
