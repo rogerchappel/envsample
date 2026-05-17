@@ -37,6 +37,14 @@
   ],
   "author": "Roger Chappel",
   "license": "MIT",
+  "homepage": "https://github.com/rogerchappel/envsample#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rogerchappel/envsample.git"
+  },
+  "bugs": {
+    "url": "https://github.com/rogerchappel/envsample/issues"
+  },
   "engines": {
     "node": ">=20"
   },
