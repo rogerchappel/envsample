@@ -36,11 +36,17 @@ const SUPPORTED_FILENAMES = new Set([
 export interface WalkResult {
   files: string[];
   skippedFiles: string[];
+  ignoredFiles: string[];
 }
 
-export async function collectSourceFiles(root: string, includeFixtures = false): Promise<WalkResult> {
+export async function collectSourceFiles(
+  root: string,
+  includeFixtures = false,
+  ignorePatterns: string[] = []
+): Promise<WalkResult> {
   const files: string[] = [];
   const skippedFiles: string[] = [];
+  const ignoredFiles: string[] = [];
 
   async function visit(current: string): Promise<void> {
     const entries = await readdir(current, { withFileTypes: true });
@@ -58,6 +64,11 @@ export async function collectSourceFiles(root: string, includeFixtures = false):
       }
 
       if (!entry.isFile()) {
+        continue;
+      }
+
+      if (matchesIgnorePattern(relative, ignorePatterns)) {
+        ignoredFiles.push(relative);
         continue;
       }
 
@@ -82,6 +93,25 @@ export async function collectSourceFiles(root: string, includeFixtures = false):
 
   return {
     files: files.sort(),
-    skippedFiles: skippedFiles.sort()
+    skippedFiles: skippedFiles.sort(),
+    ignoredFiles: ignoredFiles.sort()
   };
+}
+
+function matchesIgnorePattern(relative: string, patterns: string[]): boolean {
+  return patterns.some((pattern) => {
+    if (pattern.endsWith("/")) {
+      return relative.startsWith(pattern);
+    }
+
+    if (pattern.includes("*")) {
+      const escaped = pattern
+        .split("*")
+        .map((part) => part.replace(/[|\\{}()[\]^$+?.]/g, "\\$&"))
+        .join(".*");
+      return new RegExp("^" + escaped + "$").test(relative);
+    }
+
+    return relative === pattern || relative.startsWith(pattern + "/");
+  });
 }

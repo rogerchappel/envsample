@@ -25,6 +25,13 @@ export function renderScanText(result: ScanResult): string {
     }
   }
 
+  if (result.ignoredFiles.length > 0) {
+    lines.push("", "ignored files:");
+    for (const file of result.ignoredFiles) {
+      lines.push("- " + file);
+    }
+  }
+
   return lines.join("\n") + "\n";
 }
 

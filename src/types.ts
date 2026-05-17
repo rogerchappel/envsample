@@ -9,6 +9,7 @@ export interface CliResult {
 export interface ScanOptions {
   cwd: string;
   includeFixtures?: boolean;
+  ignorePatterns?: string[];
 }
 
 export interface EnvReference {
@@ -31,6 +32,7 @@ export interface ScanResult {
   root: string;
   references: EnvReference[];
   skippedFiles: string[];
+  ignoredFiles: string[];
   findings: Finding[];
 }
 

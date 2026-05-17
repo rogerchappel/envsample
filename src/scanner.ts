@@ -1,13 +1,15 @@
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { collectSourceFiles } from "./file-walk.js";
+import { readIgnoreFile } from "./ignore-file.js";
 import { extractEnvReferences } from "./patterns.js";
 import { toPosixRelative } from "./safety.js";
 import type { EnvReference, ScanOptions, ScanResult } from "./types.js";
 
 export async function scanProject(options: ScanOptions): Promise<ScanResult> {
   const root = path.resolve(options.cwd);
-  const walked = await collectSourceFiles(root, options.includeFixtures);
+  const ignorePatterns = [...(await readIgnoreFile(root)), ...(options.ignorePatterns ?? [])];
+  const walked = await collectSourceFiles(root, options.includeFixtures, ignorePatterns);
   const references: EnvReference[] = [];
 
   for (const filePath of walked.files) {
@@ -20,6 +22,7 @@ export async function scanProject(options: ScanOptions): Promise<ScanResult> {
     root,
     references: dedupeReferences(references),
     skippedFiles: walked.skippedFiles,
+    ignoredFiles: walked.ignoredFiles,
     findings: walked.skippedFiles.map((file) => ({
       code: "secret-file-skipped",
       severity: "info",
