@@ -82,9 +82,10 @@ async function validateCommand(args: string[]): Promise<CliResult> {
     includeFixtures: options.includeFixtures
   });
   const hasErrors = result.missing.length > 0 || result.suspicious.length > 0;
+  const shouldFail = hasErrors || (options.failOnStale && result.stale.length > 0);
 
   return {
-    exitCode: hasErrors ? 1 : 0,
+    exitCode: shouldFail ? 1 : 0,
     stdout: options.format === "json" ? JSON.stringify(result, null, 2) + "\n" : renderValidateText(result)
   };
 }
@@ -97,6 +98,7 @@ interface ParsedArgs {
   write: boolean;
   force: boolean;
   includeFixtures: boolean;
+  failOnStale: boolean;
 }
 
 function parseArgs(args: string[]): ParsedArgs {
@@ -105,7 +107,8 @@ function parseArgs(args: string[]): ParsedArgs {
     format: "text",
     write: false,
     force: false,
-    includeFixtures: false
+    includeFixtures: false,
+    failOnStale: false
   };
 
   const positionals: string[] = [];
@@ -129,6 +132,8 @@ function parseArgs(args: string[]): ParsedArgs {
       parsed.force = true;
     } else if (arg === "--include-fixtures") {
       parsed.includeFixtures = true;
+    } else if (arg === "--fail-on-stale") {
+      parsed.failOnStale = true;
     } else if (arg === "--help" || arg === "-h") {
       throw new Error("\n" + usage());
     } else if (arg.startsWith("-")) {
@@ -168,7 +173,7 @@ function usage(): string {
     "Usage:",
     "  envsample scan [path] [--format text|json]",
     "  envsample generate [path] [--write] [--output .env.example] [--force]",
-    "  envsample validate [path] [--example .env.example] [--format text|json]",
+    "  envsample validate [path] [--example .env.example] [--format text|json] [--fail-on-stale]",
     "",
     "Safety:",
     "  Files named .env, .env.local, secrets, credentials, or private keys are skipped.",
