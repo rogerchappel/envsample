@@ -1,58 +1,30 @@
 # Security Policy
 
+EnvSample is a local CLI that scans source references to environment variable names. Its central security promise is narrow: do not read or print real secret values by default.
+
 ## Supported Versions
 
-Replace this section with the supported versions for `envsample`.
-
-Example:
-
-```md
-| Version | Supported |
-| --- | --- |
-| .x | Yes |
-| < .0 | No |
-```
-
-If the project does not publish versioned releases yet, say that clearly.
+The project is pre-1.0. Security fixes target the latest release and the main branch until versioned support is defined.
 
 ## Reporting a Vulnerability
 
-Please do not report suspected vulnerabilities in public issues, pull requests, or discussions.
+Please do not include secrets, tokens, private repository contents, or exploit details in public issues.
 
-Ask maintainers for the private security reporting path before sharing details.
+Open a public issue asking for a private reporting path, or use GitHub private vulnerability reporting if it is enabled for the repository.
 
-If no private reporting path exists yet, ask maintainers through public project channels for a private reporting path. Do not include exploit details, secrets, personal data, or sensitive technical details in public messages.
+## In Scope
 
-## What to Include
+- Cases where EnvSample reads denylisted .env or secret-like files unexpectedly.
+- Cases where generated output includes secret values.
+- CLI behavior that encourages unsafe sharing of local environment data.
+- Dependency, packaging, or CI issues maintained in this repository.
 
-When a private reporting path is available, include:
+## Out of Scope
 
-- A clear description of the issue.
-- Affected versions, files, packages, workflows, or configuration.
-- Steps to reproduce, proof of concept, or attack scenario when safe to share.
-- Potential impact.
-- Suggested mitigation, if known.
+- Secrets already committed by downstream projects.
+- Runtime validation bugs in applications using generated examples.
+- Requests for guaranteed response times.
 
-## Response Expectations
+## Maintainer Guidance
 
-Maintainers review good-faith reports as capacity allows.
-
-Do not imply paid support, guaranteed response times, guaranteed fixes, or service-level agreements unless `envsample` explicitly provides them.
-
-## Scope
-
-In scope:
-
-- Vulnerabilities in envsample.
-- Insecure default configuration shipped by this project.
-- CI, release, or dependency guidance maintained by this project.
-
-Out of scope:
-
-- General support requests.
-- Requests for guaranteed maintenance timelines.
-- Issues in unrelated downstream projects.
-
-## Disclosure
-
-Coordinate disclosure with maintainers before publishing vulnerability details.
+When triaging reports, avoid asking reporters to paste real .env files. Ask for minimized fixtures with fake values instead.
