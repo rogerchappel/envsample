@@ -23,7 +23,7 @@
     "build": "tsc -p tsconfig.json",
     "check": "tsc -p tsconfig.json --noEmit",
     "test": "node --test --import tsx test/*.test.ts",
-    "smoke": "npm run build && node dist/cli.js scan fixtures/basic --format text && node dist/cli.js validate fixtures/basic --example fixtures/basic/.env.example --format json",
+    "smoke": "npm run build && node dist/bin.js scan fixtures/basic --format text && node dist/bin.js validate fixtures/basic --example .env.example --format json",
     "package:smoke": "npm pack --dry-run",
     "release:check": "npm test && npm run check && npm run build && npm run smoke && npm run package:smoke"
   },
