@@ -27,8 +27,8 @@ export async function validateEnvExample(options: ValidateOptions): Promise<Vali
   const parsed = parseEnvExample(await readFile(examplePath, "utf8"));
   const actual = [...parsed.values.keys()].sort();
   const missing = expected.filter((name) => !parsed.values.has(name));
-  const stale = actual.filter((name) => !expected.includes(name));
-  const suspicious = actual.filter((name) => isSuspicious(parsed.values.get(name) ?? ""));
+  const stale = actual.filter((name) => !expected.includes(name) && !parsed.allowed.has(name));
+  const suspicious = actual.filter((name) => !parsed.allowed.has(name) && isSuspicious(parsed.values.get(name) ?? ""));
   const findings: Finding[] = [
     ...scan.findings,
     ...missing.map((name) => ({

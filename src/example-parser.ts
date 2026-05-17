@@ -1,15 +1,23 @@
 export interface ParsedExample {
   values: Map<string, string>;
+  allowed: Set<string>;
   malformedLines: number[];
 }
 
 export function parseEnvExample(content: string): ParsedExample {
   const values = new Map<string, string>();
+  const allowed = new Set<string>();
   const malformedLines: number[] = [];
   const lines = content.split(/\r?\n/);
 
   lines.forEach((line, index) => {
     const trimmed = line.trim();
+    const allowMatch = /^#\s*envsample:\s*allow\s+([A-Za-z_][A-Za-z0-9_]*)/.exec(trimmed);
+    if (allowMatch) {
+      allowed.add(allowMatch[1]);
+      return;
+    }
+
     if (!trimmed || trimmed.startsWith("#")) {
       return;
     }
@@ -23,5 +31,5 @@ export function parseEnvExample(content: string): ParsedExample {
     values.set(match[1], match[2].trim());
   });
 
-  return { values, malformedLines };
+  return { values, allowed, malformedLines };
 }
