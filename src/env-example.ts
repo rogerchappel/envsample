@@ -2,6 +2,7 @@ import type { EnvReference } from "./types.js";
 
 export function renderEnvExample(references: EnvReference[]): string {
   const groups = new Map<string, EnvReference[]>();
+  const emittedNames = new Set<string>();
 
   for (const reference of references) {
     if (!groups.has(reference.file)) {
@@ -19,9 +20,16 @@ export function renderEnvExample(references: EnvReference[]): string {
   for (const [file, fileReferences] of [...groups.entries()].sort(([a], [b]) => a.localeCompare(b))) {
     lines.push("# " + file);
 
-    const names = [...new Set(fileReferences.map((reference) => reference.name))].sort();
+    const names = [...new Set(fileReferences.map((reference) => reference.name))]
+      .filter((name) => !emittedNames.has(name))
+      .sort();
+    if (names.length === 0) {
+      continue;
+    }
+
     for (const name of names) {
       lines.push(name + "=");
+      emittedNames.add(name);
     }
 
     lines.push("");

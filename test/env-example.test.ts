@@ -13,3 +13,12 @@ test("renders grouped blank env example entries", () => {
   assert.match(output, /# worker\.py\nWORKER_TOKEN=/);
   assert.doesNotMatch(output, /undefined|null/);
 });
+
+test("renders each env name once", () => {
+  const output = renderEnvExample([
+    { name: "DATABASE_URL", file: "compose.yaml", line: 1, syntax: "\${NAME}" },
+    { name: "DATABASE_URL", file: "src/app.ts", line: 1, syntax: "process.env.NAME" }
+  ]);
+
+  assert.equal(output.match(/^DATABASE_URL=/gm)?.length, 1);
+});
