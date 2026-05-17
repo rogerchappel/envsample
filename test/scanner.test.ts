@@ -15,3 +15,11 @@ test("scans fixture sources without reading real env files", async () => {
   ]);
   assert.deepEqual(result.skippedFiles, [".env", ".env.example"]);
 });
+
+test("honors .envsampleignore", async () => {
+  const result = await scanProject({ cwd: "fixtures/ignored" });
+  const names = result.references.map((reference) => reference.name);
+
+  assert.deepEqual(names, ["KEPT_ENV"]);
+  assert.deepEqual(result.ignoredFiles, ["generated/client.ts"]);
+});
