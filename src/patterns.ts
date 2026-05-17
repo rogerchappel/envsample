@@ -3,14 +3,14 @@ import type { EnvReference } from "./types.js";
 const ENV_NAME = "[A-Z_][A-Z0-9_]*";
 
 const PATTERNS: Array<{ syntax: string; regex: RegExp; group: number }> = [
-  { syntax: "process.env.NAME", regex: new RegExp("process\\\\.env\\\\.(" + ENV_NAME + ")", "g"), group: 1 },
-  { syntax: "process.env['NAME']", regex: new RegExp("process\\\\.env\\\\[['\\\"](" + ENV_NAME + ")['\\\"]\\\\]", "g"), group: 1 },
-  { syntax: "import.meta.env.NAME", regex: new RegExp("import\\\\.meta\\\\.env\\\\.(" + ENV_NAME + ")", "g"), group: 1 },
-  { syntax: "Deno.env.get('NAME')", regex: new RegExp("Deno\\\\.env\\\\.get\\\\(['\\\"](" + ENV_NAME + ")['\\\"]\\\\)", "g"), group: 1 },
-  { syntax: "os.environ['NAME']", regex: new RegExp("os\\\\.environ\\\\[['\\\"](" + ENV_NAME + ")['\\\"]\\\\]", "g"), group: 1 },
-  { syntax: "os.getenv('NAME')", regex: new RegExp("os\\\\.getenv\\\\(['\\\"](" + ENV_NAME + ")['\\\"]\\\\)", "g"), group: 1 },
-  { syntax: "$NAME", regex: new RegExp("(?<![A-Z0-9_])\\\\$(" + ENV_NAME + ")", "g"), group: 1 },
-  { syntax: "\${NAME}", regex: new RegExp("\\\\$\\\\{(" + ENV_NAME + ")(?::[-?][^}]*)?\\\\}", "g"), group: 1 }
+  { syntax: "process.env.NAME", regex: new RegExp("process\\.env\\.(" + ENV_NAME + ")", "g"), group: 1 },
+  { syntax: "process.env['NAME']", regex: new RegExp("process\\.env\\[['\"](" + ENV_NAME + ")['\"]\\]", "g"), group: 1 },
+  { syntax: "import.meta.env.NAME", regex: new RegExp("import\\.meta\\.env\\.(" + ENV_NAME + ")", "g"), group: 1 },
+  { syntax: "Deno.env.get('NAME')", regex: new RegExp("Deno\\.env\\.get\\(['\"](" + ENV_NAME + ")['\"]\\)", "g"), group: 1 },
+  { syntax: "os.environ['NAME']", regex: new RegExp("os\\.environ\\[['\"](" + ENV_NAME + ")['\"]\\]", "g"), group: 1 },
+  { syntax: "os.getenv('NAME')", regex: new RegExp("os\\.getenv\\(['\"](" + ENV_NAME + ")['\"]\\)", "g"), group: 1 },
+  { syntax: "$NAME", regex: new RegExp("(?<![A-Z0-9_])\\$(" + ENV_NAME + ")", "g"), group: 1 },
+  { syntax: "\${NAME}", regex: new RegExp("\\$\\{(" + ENV_NAME + ")(?::[-?][^}]*)?\\}", "g"), group: 1 }
 ];
 
 const RESERVED = new Set([
