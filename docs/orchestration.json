@@ -1,0 +1,18 @@
+{
+  "project": "envsample",
+  "purpose": "Generate and validate .env.example files from local source references without reading secrets.",
+  "defaultCommands": {
+    "scan": "envsample scan . --format json",
+    "generate": "envsample generate .",
+    "validate": "envsample validate . --example .env.example --format json"
+  },
+  "safety": {
+    "readsDotEnvByDefault": false,
+    "printsSecretValues": false,
+    "generatedValues": "blank",
+    "denylistedPathHints": [".env", ".env.local", "secret", "credential", "private-key"]
+  },
+  "ci": {
+    "strictValidate": "envsample validate . --fail-on-stale"
+  }
+}
