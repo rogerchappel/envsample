@@ -6,22 +6,20 @@ contributors, and implementation constraints.
 
 ## Now
 
-- Define the smallest useful project scope.
-- Keep repository setup, documentation, and verification easy for contributors
-  to follow.
-- Ship small, reviewable improvements.
+- Harden parser coverage against real-world repositories.
+- Keep safety docs and fixtures aligned with new scanner behavior.
+- Prepare the first public npm release.
 
 ## Next
 
-- Add the next capabilities that directly support the project's primary users.
-- Improve tests, docs, and examples around the most used workflows.
-- Reduce setup friction discovered during early use.
+- Add framework-specific examples for Next.js, Vite, Django, and FastAPI.
+- Add config-file defaults for teams that want strict stale-key enforcement.
+- Add SARIF or GitHub annotation output if CI users need inline findings.
 
 ## Later
 
-- Consider larger features after the core workflow is stable.
-- Add automation only where it removes repeated maintainer work.
-- Revisit packaging, deployment, or integration options based on real demand.
+- Explore editor integrations after CLI usage settles.
+- Consider schema-validator interop without taking over runtime validation.
 
 ## Not Planned
 
