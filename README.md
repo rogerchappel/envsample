@@ -50,6 +50,19 @@ Make stale keys fail CI too:
 envsample validate . --fail-on-stale
 ```
 
+## Demo Recipe
+
+Run the fixture-backed contract demo:
+
+```sh
+bash examples/demo-env-contract.sh
+```
+
+The demo scans `fixtures/basic`, summarizes the discovered variables, confirms
+that secret-like files are skipped, and validates the fixture `.env.example`.
+See [Validate an env contract before CI deploys](docs/tutorials/ci-env-contract.md)
+for the full recipe.
+
 ## What It Finds
 
 - JavaScript and TypeScript: process.env.NAME, process.env["NAME"], import.meta.env.NAME, Deno.env.get("NAME")
