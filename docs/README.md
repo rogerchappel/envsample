@@ -5,3 +5,5 @@
 - ORCHESTRATION.md: guidance for agents and automated workflows.
 - orchestration.json: machine-readable workflow contract.
 - SAFETY.md: practical rules for avoiding secret exposure.
+- tutorials/scan-and-generate-example.md: fixture-backed local demo.
+- promo/demo-brief.md: grounded video and social support notes.

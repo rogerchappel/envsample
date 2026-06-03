@@ -94,6 +94,12 @@ envsample validate . --format json
 
 Validation exits non-zero when required keys are missing or example values look secret-like. With --fail-on-stale, unused example keys also fail.
 
+## Demo
+
+Run the fixture-backed walkthrough in [docs/tutorials/scan-and-generate-example.md](docs/tutorials/scan-and-generate-example.md) to scan `fixtures/basic`, generate a blank `.env.example`, and connect the result to the included GitHub Actions example.
+
+Promotion notes and a short video outline live in [docs/promo/demo-brief.md](docs/promo/demo-brief.md).
+
 ## Verify
 
 ```sh
