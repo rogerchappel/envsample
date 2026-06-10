@@ -58,18 +58,22 @@ jobs:
             exit 1
           fi
 
-      - name: Run optional Node checks
+      - name: Run Node verification
         run: |
           set -euo pipefail
 
           if [ ! -f package.json ]; then
-            echo "No package.json found; skipping Node checks."
-            echo "TODO: add install, lint, test, typecheck, or build commands when this template becomes an app or package."
+            echo "No package.json found; skipping Node verification."
             exit 0
           fi
 
-          pnpm install --frozen-lockfile
-          pnpm test
-          pnpm run check
-          pnpm run build
-          pnpm run smoke
+          if [ -f package-lock.json ]; then
+            npm ci
+          else
+            npm install
+          fi
+
+          npm run check
+          npm test
+          npm run build
+          npm run smoke
