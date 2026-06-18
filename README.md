@@ -62,6 +62,8 @@ The demo scans `fixtures/basic`, summarizes the discovered variables, confirms
 that secret-like files are skipped, and validates the fixture `.env.example`.
 See [Validate an env contract before CI deploys](docs/tutorials/ci-env-contract.md)
 for the full recipe.
+For a PR-ready narration of the same fixture, see
+[examples/ci-contract-transcript.md](examples/ci-contract-transcript.md).
 
 ## What It Finds
 
@@ -112,6 +114,7 @@ Validation exits non-zero when required keys are missing or example values look 
 Run the fixture-backed walkthrough in [docs/tutorials/scan-and-generate-example.md](docs/tutorials/scan-and-generate-example.md) to scan `fixtures/basic`, generate a blank `.env.example`, and connect the result to the included GitHub Actions example.
 
 Promotion notes and a short video outline live in [docs/promo/demo-brief.md](docs/promo/demo-brief.md).
+Short launch hooks live in [docs/promo/social-hooks.md](docs/promo/social-hooks.md).
 
 ## Verify
 
