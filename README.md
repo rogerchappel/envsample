@@ -64,6 +64,8 @@ See [Validate an env contract before CI deploys](docs/tutorials/ci-env-contract.
 for the full recipe.
 For a PR-ready narration of the same fixture, see
 [examples/ci-contract-transcript.md](examples/ci-contract-transcript.md).
+For a local hook-style workflow, see
+[Check an env contract before commit](docs/tutorials/pre-commit-env-contract.md).
 
 ## What It Finds
 
