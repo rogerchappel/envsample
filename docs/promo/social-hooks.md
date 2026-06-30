@@ -30,3 +30,8 @@ Demo angle: show `envsample generate .` for the stdout flow, then use
 - Do not show real `.env` values.
 - Keep claims local-first: static pattern scanning, blank generated values, and
   explicit skip rules for secret-like files.
+
+## Longer launch thread
+
+Use [launch-thread-env-contract.md](launch-thread-env-contract.md) when a post
+needs a step-by-step narrative around the fixture demo and CI command.
